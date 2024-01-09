@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>ToDo app</title>
+
+</head>
+<body>
+    <div class="container">
+    <div class="card">
+        <div class="card-header">
+            To-Do
+            <button class="btn btn-success position-absolute top-0 end-0" data-bs-toggle="modal" data-bs-target="#todoModal" type="submit">Add</button>
+            <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="todoModalLabel">ToDo-Add Tasks</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card">
+                        <div class="card-body" id="todoform"> 
+                            <form>                            
+                              <div class="input-group mb-3">
+                                <span class="input-group-text">Task name</span>
+                                <input type="text" class="form-control" id="taskname" placeholder="Task Name" aria-label="Task Name">
+                                
+                            </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">Start Date</span>
+                                <input type="date" class="form-control" id="startdate" placeholder="Start Date" aria-label="Start Date">
+                                
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">End Date</span>
+                                <input type="date" class="form-control" id="enddate"placeholder="End Date" aria-label="End Date">
+                                
+                                </div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form> 
+                        </div>
+                      </div>
+                    </div>
+                    <!-- <div class="modal-footer">
+                      
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="card-body">
+          <div class="card">
+            <form id="listform">                            
+                <div class="input-group mb-3">
+                  <span class="input-group-text">Task name</span>
+                  <input type="text" disabled class="form-control" id="listform-taskname" placeholder="Task Name" aria-label="Task Name">
+                      <span class="input-group-text">Start Date</span>
+                  <input type="date" disabled class="form-control" id="listform-startdate" placeholder="Start Date" aria-label="Start Date">
+                  
+                      <span class="input-group-text">End Date</span>
+                  <input type="date" disabled class="form-control" id="listform-enddate"placeholder="End Date" aria-label="End Date">
+                  
+                  
+                  <button type="button" id="editButton"onclick="enableEditMode()" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#todoModal">Edit</button>
+        <button type="button" onclick="deletefunc()"class="btn btn-danger">Delete</button>
+    </div>
+              </form>
+
+          </div>
+        </div>
+        <div class="modal fade" id="todoModal" tabindex="-1" aria-labelledby="todoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="todoModalLabel">ToDo-Add Tasks</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="card">
+                    <div class="card-body" id="todoform"> 
+                        <form>                            
+                          <div class="input-group mb-3">
+                            <span class="input-group-text">Task name</span>
+                            <input type="text" class="form-control" id="taskname" placeholder="Task Name" aria-label="Task Name">
+                            
+                        </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">Start Date</span>
+                            <input type="date" class="form-control" id="startdate" placeholder="Start Date" aria-label="Start Date">
+                            
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">End Date</span>
+                            <input type="date" class="form-control" id="enddate"placeholder="End Date" aria-label="End Date">
+                            
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                        </form> 
+                    </div>
+                  </div>
+                </div>
+                <!-- <div class="modal-footer">
+                  
+                </div> -->
+              </div>
+            </div>
+          </div>
+      </div>
+      
+    </div>
+<script>
+    function enableEditMode() {
+        console.log(listform-taskname.value)
+        document.getElementById('taskname').value=listform-taskname.value;
+        document.getElementById('startdate').value=listform-startdate.value;
+        document.getElementById('enddate').value=listform-enddate.value;
+    }
+    function deletefunc(){
+        let listform = document.getElementById('listform')
+        listform.reset();
+    }
+    let todoform = document.getElementById("todoform");
+
+todoform.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  let taskname = document.getElementById("taskname");
+  let startdate = document.getElementById("startdate");
+  let enddate = document.getElementById("enddate");
+
+  if (taskname.value == "" || startdate.value == "" || enddate.value == "") {
+    alert("Ensure you input a value in all three fields!");
+  }
+  else if(enddate.value<startdate.value){
+    alert("Ensure to add a correct date");
+  } 
+  else {
+    // perform operation with form input
+    alert("Task has been successfully added");
+    console.log(
+      `This form has a taskname of ${taskname.value} startdate of ${startdate.value} and enddate of ${enddate.value}`
+    );
+    var elem = document.getElementById('listform').elements;
+    for(var i = 0; i < elem.length; i++){
+        document.getElementById('listform-taskname').value=taskname.value;
+        document.getElementById('listform-startdate').value=startdate.value;
+        document.getElementById('listform-enddate').value=enddate.value;
+    }
+
+
+    taskname.value = "";
+    startdate.value = "";
+    enddate.value = "";
+  }
+});
+    var x = document.getElementById("taskname");
+    console.log(x)
+</script>
+</body>
+</html>
